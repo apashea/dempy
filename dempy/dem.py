@@ -1,4 +1,5 @@
 import numpy as np
+import math  # use standard library factorial; np.math is not available in NumPy 2.x
 import logging
 
 from tqdm.autonotebook import tqdm
@@ -100,7 +101,8 @@ class DEMInversion:
             # Create T_ij(t) (note that indices start at 0) 
             for i in range(p): 
                 for j in range(p): 
-                    T[i, j] = float( ((i - y + 1) * dt)**j / np.math.factorial(j))
+                    #T[i, j] = float( ((i - y + 1) * dt)**j / np.math.factorial(j))
+                    T[i, j] = float(((i - y + 1) * dt)**j / math.factorial(j))
             
             # Compute E
             E[:] = np.linalg.inv(T)
